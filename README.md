@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ZendSkeletonApplication
 =======================
 
@@ -59,3 +60,7 @@ directory:
 
 This will start the cli-server on port 8080, and bind it to all network
 interfaces.
+=======
+hashtagplus
+===========
+>>>>>>> 62b42fcc2ea0e85570a3ccd3d4ca56ca482ad18f
