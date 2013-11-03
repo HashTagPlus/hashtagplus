@@ -1,0 +1,55 @@
+<?php
+namespace Hash\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+
+class HashTable
+{
+    protected $tableGateway;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
+
+    public function getHash($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+
+    public function saveHash(Hash $hash)
+    {
+        $data = array(
+            'url' => $hash->url,
+            
+        );
+
+        $id = (int)$hash->id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getHash($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Form id does not exist');
+            }
+        }
+    }
+
+    public function deleteHash($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));
+    }
+}

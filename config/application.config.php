@@ -7,6 +7,7 @@ return array(
         'ZfcBase',
         'ZfcUser',
         'Album',
+		  'Entry',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
