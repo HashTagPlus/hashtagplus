@@ -11,6 +11,7 @@ class Entry
 {
     public $id;
     public $url;
+    public $type;
 
     protected $inputFilter;  
 
@@ -18,10 +19,10 @@ class Entry
     {
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->url = (isset($data['url'])) ? $data['url'] : null;
+        $this->type = (isset($data['type'])) ? $data['type'] : null;
     }
 
 
- // Add the following method:
     public function getArrayCopy()
     {
         return get_object_vars($this);
@@ -29,7 +30,7 @@ class Entry
 
 
 
-	    // Add content to these methods:
+	/* Set up the input filters */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
@@ -58,11 +59,9 @@ class Entry
                 ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name'    => 'Regex',
                         'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                            'pattern' => '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
                         ),
                     ),
                 ),

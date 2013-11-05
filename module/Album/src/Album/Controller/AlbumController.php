@@ -5,6 +5,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Album\Model\Album;          // <-- Add this import
 use Album\Form\AlbumForm;       // <-- Add this import
+use Doctrine\ORM\EntityManager;
 
 
 class AlbumController extends AbstractActionController
@@ -22,6 +23,12 @@ class AlbumController extends AbstractActionController
 
     public function indexAction()
     {
+    	
+    	$users = $this->getEntityManager()->getRepository('Album\Entity\Album')->findAll();
+    	
+    	print_r($users);
+    	 
+    	
     	return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
@@ -118,5 +125,20 @@ class AlbumController extends AbstractActionController
             'album' => $this->getAlbumTable()->getAlbum($id)
         );
     }
+    
+    
+    /**
+     * @var Doctrine\ORM\EntityManager
+     */
+    protected $em;
+    
+    public function getEntityManager()
+    {
+    	if (null === $this->em) {
+    		$this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+    	}
+    	return $this->em;
+    }
+    
 
 }
