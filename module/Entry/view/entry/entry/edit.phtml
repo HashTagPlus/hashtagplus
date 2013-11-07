@@ -1,5 +1,5 @@
 <?php
-// module/Album/view/album/album/edit.phtml:
+
 
 $title = 'Edit entry';
 $this->headTitle($title);
@@ -8,6 +8,8 @@ $this->headTitle($title);
 
 <?php
 $form = $this->form;
+
+
 $form->setAttribute('action', $this->url(
     'entry',
     array(
@@ -15,6 +17,7 @@ $form->setAttribute('action', $this->url(
         'id'     => $this->id,
     )
 ));
+
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -22,3 +25,5 @@ echo $this->formHidden($form->get('id'));
 echo $this->formRow($form->get('url'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
+
+?>

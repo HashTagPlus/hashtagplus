@@ -13,14 +13,14 @@ $this->headTitle($title);
     <th>Title</th>
     <th>&nbsp;</th>
 </tr>
-<?php foreach ($entryes as $entry) : ?>
+<?php foreach ($entries as $entry) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($entry->url);?></td>
+    <td><?php echo $this->escapeHtml($entry->getUrl());?></td>
     <td>
         <a href="<?php echo $this->url('entry',
-            array('action'=>'edit', 'id' => $entry->id));?>">Edit</a>
+            array('action'=>'edit', 'id' => $entry->getId()));?>">Edit</a>
         <a href="<?php echo $this->url('entry',
-            array('action'=>'delete', 'id' => $entry->id));?>">Delete</a>
+            array('action'=>'delete', 'id' => $entry->getId()));?>">Delete</a>
     </td>
 </tr>
 <?php endforeach; ?>

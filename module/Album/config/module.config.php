@@ -52,7 +52,4 @@ return array(
 		)
 		
 		
-		
-		
-		
 );
