@@ -10,12 +10,17 @@ $this->headTitle($title);
 
 <table class="table">
 <tr>
+    <th>Description</th>
     <th>Title</th>
-    <th>&nbsp;</th>
+     <th>Type</th>
+    <th>Actions</th>
 </tr>
 <?php foreach ($entries as $entry) : ?>
+<?php //print_r($entry);die;?>
 <tr>
+<td><?php echo $this->escapeHtml($entry->getDescription());?></td>
     <td><?php echo $this->escapeHtml($entry->getUrl());?></td>
+    <td><?php echo $this->escapeHtml($entry->getEntrytype()->getEntryTypeString());?></td>
     <td>
         <a href="<?php echo $this->url('entry',
             array('action'=>'edit', 'id' => $entry->getId()));?>">Edit</a>

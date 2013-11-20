@@ -20,9 +20,17 @@ $form->setAttribute('action', $this->url(
 
 $form->prepare();
 
+echo '<pre>';
+\Doctrine\Common\Util\Debug::dump($form);
+echo '</pre>';
+
+//print_r($form);
+
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('description'));
 echo $this->formRow($form->get('url'));
+echo $this->formRow($form->get('entrytypes'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 

@@ -10,19 +10,44 @@ use Entry\Form\EntryForm; // <-- Add this import
 use Doctrine\ORM\EntityManager;
 
 class EntryController extends AbstractActionController {
-	protected $entryTable;
-	public function getEntryTable() {
-		if (! $this->entryTable) {
-			$sm = $this->getServiceLocator ();
-			$this->entryTable = $sm->get ( 'Entry\Model\EntryTable' );
-		}
-		return $this->entryTable;
-	}
+
 	public function indexAction() {
+		
+		//$query = $this->getEntityManager ()->
+		//createQuery("SELECT Entry.url, Type.type FROM \Entry\Entity\Entry, \Type\Entity\Type  
+		//			WHERE Entry.type = Type.id");
+		//$users = $query->getResult();
+		//$entityManager = $this->getEntityManager();
+		
+		//$entityManager
+       // -> createQuery('select c.url as entry_url from \Entry\Entity\Entry e JOIN e.type_id type')
+        //-> getResult();
+		
+		//$query = $this->getEntityManager()->createQueryBuilder()
+		//->select('u')
+		//->from('\Entry\Entity\Entry', 'u')
+		//->leftJoin('u.type', 'a')
+		//->getQuery();
+		//$info = $query->getResult();
+		
+		
+		//$result = $entityManager->createQueryBuilder()
+		//->select('e', 't')
+		//->from('Entry\Entity\Entry', 'e')
+		//->innerJoin('e.type_id', 't', 'WITH', 'e.type_id = t.id')
+		//->getQuery()
+		//->getResult();
+		
+		
+		//print_r($result); die;
+		
 		return new ViewModel ( array (
 				'entries' => $this->getEntityManager ()->getRepository ( 'Entry\Entity\Entry' )->findAll () 
 		) );
 	}
+	
+	
+	
 	public function addAction() {
 		$form = new EntryForm ();
 		$form->get ( 'submit' )->setValue ( 'Add' );
@@ -58,6 +83,7 @@ class EntryController extends AbstractActionController {
 		$request = $this->getRequest ();
 		if ($request->isPost ()) {
 			$entry->setUrl ( $this->getRequest ()->getPost ( 'url' ) );
+			$entry->setDescription ( $this->getRequest ()->getPost ( 'description' ) );
 			
 			$this->getEntityManager ()->persist ( $entry );
 			$this->getEntityManager ()->flush ();

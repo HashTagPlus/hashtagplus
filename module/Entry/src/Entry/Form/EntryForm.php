@@ -17,6 +17,25 @@ class EntryForm extends Form
             ),
         ));
         $this->add(array(
+        		'name' => 'description',
+        		'attributes' => array(
+        				'type'  => 'text',
+        		),
+        		'options' => array(
+        				'label' => 'Description',
+        		),
+        ));
+        $this->add(array(            
+            'name' => 'entrytypes',
+            'attributes' =>  array(
+                'id' => 'id',                
+                'type' => 'text',
+            ),
+            'options' => array(
+                'label' => 'User Name',
+            ),
+        ));       
+        $this->add(array(
             'name' => 'url',
             'attributes' => array(
                 'type'  => 'text',

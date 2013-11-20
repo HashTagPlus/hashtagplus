@@ -19,6 +19,7 @@ class Entry
     {
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->url = (isset($data['url'])) ? $data['url'] : null;
+        $this->description = (isset($data['url'])) ? $data['description'] : null;
         $this->type = (isset($data['type'])) ? $data['type'] : null;
     }
 
